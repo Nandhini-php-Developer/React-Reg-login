@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React , {useState} from 'react'
+import Register from './Components/Register'
+import Login  from './Components/Login'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-function App() {
+const App = () => {
+  const [registeredEmail, setRegisteredEmail] = useState('');
+
+  const handleRegister = (email) => {
+    // Store the registered email in state
+    setRegisteredEmail(email);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+    <div>
+        <center><h1>Register/Login Form</h1></center>
+        <Routes>
+          <Route path="/" element={<Register onRegister={handleRegister} />} />
+          <Route path="/login" element={<Login registeredEmail={registeredEmail} />} />
+        </Routes>
     </div>
-  );
+    </Router>
+  )
 }
 
-export default App;
+export default App
